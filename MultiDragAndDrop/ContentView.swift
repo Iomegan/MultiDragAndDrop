@@ -19,8 +19,7 @@ struct ContentView: View {
                     SidebarItemView(sidebarItem: sidebarItem)
                 }
             }
-
-        } detail: {
+        } content: {
             if let selectedSidebarItem = navigationModel.selectedSidebarItem {
                 List(selection: $navigationModel.selectedDetailItems) {
                     ForEach(selectedSidebarItem.detailItems) { detailItem in
@@ -31,6 +30,8 @@ struct ContentView: View {
                     }
                 }
             }
+        } detail: {
+            Text(navigationModel.selectedDetailItems.count, format: .number)
         }
     }
 }

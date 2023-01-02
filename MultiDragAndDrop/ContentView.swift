@@ -29,6 +29,7 @@ struct ContentView: View {
                         }
                     }
                 }
+//                .draggable(selectedSidebarItem.detailItems)
             }
         } detail: {
             Text(navigationModel.selectedDetailItems.count, format: .number)

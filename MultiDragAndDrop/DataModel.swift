@@ -17,15 +17,7 @@ class SidebarItem: NSObject, ObservableObject, Identifiable {
     }
 }
 
-class DetailItem: NSObject, ObservableObject, Identifiable, Transferable {
-    static var transferRepresentation: some TransferRepresentation {
-        ProxyRepresentation(exporting: \.id.uuidString)
-        
-        ProxyRepresentation { detailItem in
-            detailItem.fileURL // WORKAROUND: Use file URl in ProxyRepresentation as FileRepresentation does not seem to work: https://developer.apple.com/forums/thread/708794
-        }
-    }
-    
+class DetailItem: NSObject, ObservableObject, Identifiable {
     static var tempDirectoryURL: URL = {
         let tempDirURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("rocket_typist")
         do {
@@ -44,8 +36,6 @@ class DetailItem: NSObject, ObservableObject, Identifiable, Transferable {
     }
     
     var fileURL: URL {
-        //        return URL(filePath: "/Users/danielwitt/Desktop/Today is day 22 of Decembe.rockettypist")
-        
         let fileManager = FileManager.default
         let fileName = "\(id.uuidString)"
         var tempDirectoryFileURL = URL(fileURLWithPath: "\(Self.tempDirectoryURL.path)/\(fileName).txt")
@@ -76,3 +66,19 @@ class DetailItem: NSObject, ObservableObject, Identifiable, Transferable {
         return tempDirectoryFileURL
     }
 }
+
+extension DetailItem: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.id.uuidString)
+        
+        ProxyRepresentation { detailItem in
+            detailItem.fileURL // WORKAROUND: Use file URl in ProxyRepresentation as FileRepresentation does not seem to work: https://developer.apple.com/forums/thread/708794
+        }
+    }
+}
+
+//extension Array: Transferable where Element: DetailItem {
+//    static var transferRepresentation: some TransferRepresentation {
+//       ???
+//    }
+//}

@@ -8,12 +8,12 @@
 import SwiftUI
 
 class DataStore: NSObject, ObservableObject {
-    @Published var sidebarItems = [SidebarItem(detailItems:
-        [DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem()]),
-                                   
-    SidebarItem(detailItems:
-        [DetailItem(), DetailItem(), DetailItem(), DetailItem()]),
-                                   
-    SidebarItem(detailItems:
-        [DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem()])]
+	@Published var sidebarItems = [SidebarItem(detailItems:
+		[DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem()]),
+
+	SidebarItem(detailItems:
+		[DetailItem(), DetailItem(), DetailItem(), DetailItem()]),
+
+	SidebarItem(detailItems:
+		[DetailItem(), DetailItem(), DetailItem(), DetailItem(), DetailItem()])]
 }

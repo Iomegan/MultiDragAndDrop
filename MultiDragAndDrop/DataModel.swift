@@ -69,8 +69,10 @@ class DetailItem: NSObject, ObservableObject, Identifiable {
 
 extension DetailItem: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        ProxyRepresentation(exporting: \.id.uuidString)
-        
+        ProxyRepresentation(exporting: \.id.uuidString) // For drag and drop within the app
+//		FileRepresentation(exportedContentType: .fileURL) { item in
+//			SentTransferredFile(item.fileURL)
+//		} //Not working, using ProxyRepresentation instead
         ProxyRepresentation { detailItem in
             detailItem.fileURL // WORKAROUND: Use file URl in ProxyRepresentation as FileRepresentation does not seem to work: https://developer.apple.com/forums/thread/708794
         }

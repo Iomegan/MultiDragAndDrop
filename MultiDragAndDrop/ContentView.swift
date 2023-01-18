@@ -25,7 +25,7 @@ struct ContentView: View {
                     ForEach(selectedSidebarItem.detailItems) { detailItem in
                         NavigationLink(value: detailItem) {
                             Text(detailItem.id.uuidString)
-                                .draggable(detailItem)
+                                .draggable(detailItem) //Only drags one item at a time, but I want to drag the whole selection if multiple items are selected. just like in Finder or any other standard Mac app...
                         }
                     }
                 }

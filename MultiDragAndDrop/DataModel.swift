@@ -19,7 +19,7 @@ class SidebarItem: NSObject, ObservableObject, Identifiable {
 
 class DetailItem: NSObject, ObservableObject, Identifiable {
     static var tempDirectoryURL: URL = {
-        let tempDirURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("rocket_typist")
+        let tempDirURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("MultiDragAndDropApp")
         do {
             try FileManager.default.createDirectory(at: tempDirURL, withIntermediateDirectories: true, attributes: nil)
         }
@@ -39,7 +39,7 @@ class DetailItem: NSObject, ObservableObject, Identifiable {
         let fileManager = FileManager.default
         let fileName = "\(id.uuidString)"
         var tempDirectoryFileURL = URL(fileURLWithPath: "\(Self.tempDirectoryURL.path)/\(fileName).txt")
-        for i in 0 ... 9999 { // no more than 9999 at once
+        for i in 0 ... 9999 {
             if fileManager.fileExists(atPath: tempDirectoryFileURL.path) {
                 tempDirectoryFileURL = URL(fileURLWithPath: "\(Self.tempDirectoryURL.path)/\(fileName) \(i + 1).txt")
             }
@@ -53,7 +53,7 @@ class DetailItem: NSObject, ObservableObject, Identifiable {
         do {
             let data = id.uuidString.data(using: .utf16)
             
-            if fileManager.fileExists(atPath: path) { // Could happen if more than 999 files with the same name exist
+            if fileManager.fileExists(atPath: path) {
                 NSLog(path)
                 try FileManager.default.removeItem(at: tempDirectoryFileURL)
             }
@@ -77,7 +77,7 @@ extension DetailItem: Transferable {
     }
 }
 
-//extension Array: Transferable where Element: DetailItem {
+//extension Array: Transferable where Element: DetailItem { // Not working as expected
 //    static var transferRepresentation: some TransferRepresentation {
 //       ???
 //    }

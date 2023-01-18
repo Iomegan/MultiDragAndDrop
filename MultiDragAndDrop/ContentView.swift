@@ -29,7 +29,7 @@ struct ContentView: View {
                         }
                     }
                 }
-//                .draggable(selectedSidebarItem.detailItems)
+//                .draggable(selectedSidebarItem.detailItems) //Not working
             }
         } detail: {
             Text(navigationModel.selectedDetailItems.count, format: .number)
